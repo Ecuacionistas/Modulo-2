@@ -1,0 +1,403 @@
+---
+title: "Lenguaje R-Cran"
+author: 
+  - name: "Ricardo R. Palma"
+    department: "Department of Industrial Engineering"
+    affiliation: "Instituto de Ingeniería Industrial"
+    location: "Mendoza, PA 5502 Argentina"
+    email: "rpalma@uncu.edu.ar"
+  - name: "Gustavo A. Masera"
+    department: "Historia del Pensamiento Económico"
+    affiliation: "IMESC - Fac. Filosofía y Letras"
+    location: "Universidad Nacional de Cuyo - Mendoza Argentina"
+    email: "gmasera@gmail.com"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Repaso de R
+
+Introducción a R
+
+R es un lenguaje de programación ampliamente utilizado en el análisis de datos y la estadística. Ofrece una amplia variedad de funciones y paquetes que facilitan la manipulación, visualización y análisis de datos.
+
+Funcionalidad y Uso de R
+
+R es un lenguaje interpretado con una gran variedad de tipos de datos y funciones para el análisis estadístico. Permite manipular datos de forma eficiente y realizar análisis complejos.
+
+Ejemplo de Uso de R
+
+En R, se pueden realizar asignaciones y crear vectores de manera sencilla. Por ejemplo:
+
+x <- 10
+vector <- c(1, 2, 3, 4, 5)
+print(vector)
+
+Análisis y Modelado de Datos
+
+Es fundamental analizar tanto los datos del sistema como los resultados de la simulación para extraer conclusiones válidas. R ofrece herramientas poderosas para este propósito.
+
+Metodología de Simulación
+
+Los pasos para realizar una simulación incluyen la definición de variables de entrada y salida, la preparación de datos y la traducción del modelo a código ejecutable.
+
+Verificación y Validación de Modelos
+
+Es importante verificar que el modelo funcione correctamente y validar que los resultados sean representativos del sistema real.
+
+Diseño Experimental y Simplificación de Modelos
+
+El diseño experimental es crucial para obtener información relevante, mientras que la simplificación de modelos ayuda a mejorar la eficiencia del modelo al identificar factores críticos y omitir detalles menos relevantes.
+
+Gráficos Estadísticos
+
+Los gráficos estadísticos, como diagramas de dispersión y boxplots, son útiles para el análisis de datos al mostrar patrones, tendencias y anomalías.
+
+Documentación y Aplicación de Resultados
+
+Es fundamental documentar adecuadamente el modelo y los resultados de la simulación para que puedan ser utilizados o reutilizados en estudios futuros.
+
+Definición de Funciones en R
+
+R ofrece funciones matemáticas comunes y permite a los usuarios definir sus propias funciones con una sintaxis específica.
+
+Manejo de Datos y Invocación de Funciones en R
+
+R ofrece herramientas para manejar datos básicos y para invocar funciones de manera efectiva.
+
+En conclusión, R es una herramienta poderosa y versátil para el análisis de datos y la simulación. Con una amplia gama de funciones y paquetes disponibles, R se ha convertido en una opción popular para aquellos que trabajan con datos en una variedad de disciplinas.
+
+## Comandos
+
+1. summary(): Este comando te da un resumen estadístico de una variable o dataframe. Es una herramienta muy útil para obtener una vista rápida de tus datos.
+
+2. ggplot2: Este paquete te permite crear visualizaciones de datos hermosas e informativas. Es una herramienta muy popular entre los usuarios de R.
+
+3. for: Este comando te permite ejecutar un bloque de código un número determinado de veces. Es una herramienta muy útil para automatizar tareas repetitivas.
+
+4. ifelse: Este comando te permite ejecutar un bloque de código si se cumple una condición y otro bloque de código si no se cumple. Es una herramienta muy útil para tomar decisiones en tu código.
+
+5. sapply: Este comando te permite aplicar una función a un vector o dataframe y obtener un vector o dataframe como resultado. Es una herramienta muy útil para trabajar con conjuntos de datos.
+
+## Vectores
+
+```{r}
+vector_a <- 0
+for (i in 1:50000) { vector_a[i] <- (i*2)}
+head (vector_a)
+
+```
+
+```{r}
+vector_b <- seq(1:16)
+head (vector_b)
+
+vector_b
+```
+
+## Matrices
+
+```{r}
+mi_matriz_c <- matrix(vector_b, nrow=4)
+
+mi_matriz_c
+```
+
+```{r}
+mi_matriz_c[2,3]
+```
+
+¿Como traer la fila 4 completa?
+
+```{r}
+mi_matriz_c [4, ]
+```
+
+¿Como taer una columna?
+```{r}
+mi_matriz_c[ ,1]
+```
+
+¿Que hará este comando? Trae toda la matriz menos la fila 2
+
+```{r}
+mi_matriz_c[-2 , ]
+```
+
+##Temporizador
+
+```{r}
+sleep_for_a_minute <- function() { Sys.sleep(14) }
+start_time <- Sys.time()
+sleep_for_a_minute()
+
+end_time <- Sys.time()
+end_time - start_time
+```
+##Tictoc
+```{r}
+library(tictoc)
+tic("sleeping")
+A<-20
+print("dormire una siestita...")
+## [1] "dormire una siestita..."
+Sys.sleep(2)
+print("...suena el despertador")
+## [1] "...suena el despertador"
+toc()
+```
+
+# Penitencia de Gauss
+#1) For con Bucle
+```{r}
+
+start_time <- Sys.time()
+
+n <- 5502
+resultado <- penitencia_gauss_for(n)
+cat("La suma de los primeros", n, "números naturales es:", resultado)
+penitencia_gauss_for <- function(n) {
+  if (n %% 1 != 0 || n <= 0) {
+    stop("El número ingresado debe ser un entero positivo.")
+  }
+  
+  suma <- 0
+  for (i in 1:n) {
+    suma <- suma + i
+  }
+  
+  return(suma)
+}
+
+end_time <- Sys.time()
+
+Tiempo <- (end_time - start_time)
+cat(" El tiempo de cálculo es", Tiempo )
+```
+
+#2)Sumas y multiplicar
+
+```{r}
+
+start_time <- Sys.time()
+
+n <- 5502
+resultado <- penitencia_gauss_sumas_multiplicaciones(n)
+cat("La suma de los primeros", n, "números naturales es:", resultado)
+penitencia_gauss_sumas_multiplicaciones <- function(n) {
+  if (n %% 1 != 0 || n <= 0) {
+    stop("El número ingresado debe ser un entero positivo.")
+  }
+  
+  suma <- (n * (n + 1)) / 2
+  
+  return(suma)
+}
+
+end_time <- Sys.time()
+
+Tiempo <- (end_time - start_time)
+cat(" El tiempo de cálculo es", Tiempo )
+
+```
+
+#Fibonacci
+
+```{r}
+
+start_time <- Sys.time()
+
+fibonacci <- function(n) {
+  if (n <= 0) {
+    return(0)
+  } else if (n == 1) {
+    return(1)
+  } else {
+    a <- 0
+    b <- 1
+    for (i in 2:n) {
+      temp <- b
+      b <- a + b
+      a <- temp
+      if (b > 1000000) {
+        break
+      }
+    }
+    return(b)
+  }
+}
+n <- 1
+while (fibonacci(n) <= 1000000) {
+  n <- n + 1
+ nfibonacci<- fibonacci(n)
+}
+
+cat("El término de Fibonacci que excede 1,000,000 es:", n, "\n")
+nfibonacci
+
+end_time <- Sys.time()
+
+Tiempo <- (end_time - start_time)
+cat(" El tiempo de cálculo es", Tiempo )
+
+```
+
+#Burbuja
+
+```{r}
+
+start_time <- Sys.time()
+
+# Tomo una muestra de 10 números ente 1 y 100
+x<-sample(1:100,10)
+# Creo una funci?n para ordenar
+burbuja <- function(x){
+n<-length(x)
+for(j in 1:(n-1)){
+for(i in 1:(n-j)){
+if(x[i]>x[i+1]){
+temp<-x[i]
+x[i]<-x[i+1]
+x[i+1]<-temp
+}
+}
+}
+return(x)
+}
+res<-burbuja(x)
+#Muestra obtenida
+x
+res
+
+end_time <- Sys.time()
+
+Tiempo <- (end_time - start_time)
+cat(" El tiempo de cálculo es", Tiempo )
+
+```
+
+#Ordenar con sort
+
+```{r}
+sort(x)
+```
+
+# Introduction
+
+Here goes an introduction text
+
+# Headings: first level
+\label{sec:headings}
+
+You can use directly LaTeX command or Markdown text. 
+
+LaTeX command can be used to reference other section. See Section \ref{sec:headings}.
+However, you can also use **bookdown** extensions mechanism for this.
+
+## Headings: second level
+
+You can use equation in blocks
+
+$$
+\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
+$$
+
+But also inline i.e $z=x+y$
+
+### Headings: third level
+
+Another paragraph. 
+
+
+# Examples of citations, figures, tables, references
+\label{sec:others}
+
+You can insert references. Here is some text [@kour2014real; @kour2014fast] and see @hadash2018estimate.
+
+The documentation for \verb+natbib+ may be found at
+
+You can use custom blocks with LaTeX support from **rmarkdown** to create environment.
+
+::: {.center latex=true}
+  <http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}>
+:::
+
+Of note is the command \verb+\citet+, which produces citations
+appropriate for use in inline text.  
+
+You can insert LaTeX environment directly too.
+
+\begin{verbatim}
+   \citet{hasselmo} investigated\dots
+\end{verbatim}
+
+produces
+
+\begin{quote}
+  Hasselmo, et al.\ (1995) investigated\dots
+\end{quote}
+
+\begin{center}
+  \url{https://www.ctan.org/pkg/booktabs}
+\end{center}
+
+
+## Figures
+
+You can insert figure using LaTeX directly. 
+
+See Figure \ref{fig:fig1}. Here is how you add footnotes. [^Sample of the first footnote.]
+
+\begin{figure}
+  \centering
+  \fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
+  \caption{Sample figure caption.}
+  \label{fig:fig1}
+\end{figure}
+
+But you can also do that using R.
+
+```{r fig2, fig.cap = "Another sample figure"}
+plot(mtcars$mpg)
+```
+You can use **bookdown** to allow references for Tables and Figures.
+
+
+## Tables
+
+Below we can see how to use tables. 
+
+See awesome Table~\ref{tab:table} which is written directly in LaTeX in source Rmd file.
+
+\begin{table}
+ \caption{Sample table title}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \multicolumn{2}{c}{Part}                   \\
+    \cmidrule(r){1-2}
+    Name     & Description     & Size ($\mu$m) \\
+    \midrule
+    Dendrite & Input terminal  & $\sim$100     \\
+    Axon     & Output terminal & $\sim$10      \\
+    Soma     & Cell body       & up to $10^6$  \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:table}
+\end{table}
+
+You can also use R code for that.
+
+```{r}
+knitr::kable(head(mtcars), caption = "Head of mtcars table")
+```
+
+## Lists
+
+- Item 1
+- Item 2 
+- Item 3
+
